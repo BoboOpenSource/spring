@@ -1,1 +1,16 @@
 rootProject.name = 'spring'
+enableFeaturePreview('VERSION_CATALOGS')
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            version('springboot', '2.5.5')
+            version('lombok', '1.18.20')
+            alias('springboot-start').to('org.springframework.boot', 'spring-boot-starter').versionRef('springboot')
+            alias('springboot-start-test').to('org.springframework.boot', 'spring-boot-starter-test').versionRef('springboot')
+            alias('lombok').to('org.projectlombok', 'lombok').versionRef('lombok')
+            bundle('springboot', ['springboot-start','springboot-start-test'])
+        }
+    }
+}
+include 'spring-external-config'
+include 'spring-ioc'
