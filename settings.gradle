@@ -5,12 +5,13 @@ dependencyResolutionManagement {
         libs {
             version('springboot', '2.5.5')
             version('lombok', '1.18.20')
-            alias('springboot-start').to('org.springframework.boot', 'spring-boot-starter').versionRef('springboot')
-            alias('springboot-start-test').to('org.springframework.boot', 'spring-boot-starter-test').versionRef('springboot')
+            alias('springboot-starter').to('org.springframework.boot', 'spring-boot-starter').versionRef('springboot')
+            alias('springboot-test-starter').to('org.springframework.boot', 'spring-boot-starter-test').versionRef('springboot')
             alias('lombok').to('org.projectlombok', 'lombok').versionRef('lombok')
-            bundle('springboot', ['springboot-start','springboot-start-test'])
+            bundle('springboot', ['springboot-starter','springboot-test-starter'])
         }
     }
 }
 include 'spring-introduction'
+include 'application-context-lifecycle'
 

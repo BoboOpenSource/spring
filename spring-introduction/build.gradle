@@ -1,20 +1,4 @@
-plugins {
-    id 'java'
-}
-
-group 'com.example'
-version '0.0.1-SNAPSHOT'
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    implementation libs.bundles.springboot
-    compileOnly libs.lombok
-    annotationProcessor libs.lombok
-}
 
-test {
-    useJUnitPlatform()
+    implementation 'org.apache.httpcomponents:httpclient'
 }
