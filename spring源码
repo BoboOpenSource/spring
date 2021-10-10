@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-10-10T14:50:24.263Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36" etag="G0ELdvPXR6IWMblE26Lr" version="14.8.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-10-10T15:14:07.734Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36" etag="NbmjIxgMeRqqvIAnvd_w" version="14.8.3" type="github">
   <diagram id="xym_TpFOBW4FcQDZf0_9" name="Page-1">
     <mxGraphModel dx="1038" dy="579" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -13,8 +13,20 @@
         <mxCell id="xzdQ9acgRFiVdVMhkuag-15" value="ListableBeanFactory" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
           <mxGeometry x="140" y="280" width="140" height="52" as="geometry" />
         </mxCell>
-        <mxCell id="xzdQ9acgRFiVdVMhkuag-17" value="beanFactory只支持单个bean的查找，按beanName查找单个bean无可厚非，但同一个class有时会对应多个bean，" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="140" y="350" width="290" height="20" as="geometry" />
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-17" value="&lt;div style=&quot;text-align: center&quot;&gt;&lt;span&gt;&lt;b&gt;ListableBeanFactory&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;beanFactory只支持单个bean的依赖查找(按beanName或beanType)，按beanName查找单个bean无可厚非，因为在一个beanFactory中，beanName一定是唯一的。但同一个beanType有时会对应多个bean，此时试图使用&lt;br&gt;beanFactory的beanType依赖查找方法，就会报错&lt;br&gt;&lt;br&gt;&lt;span&gt;ListableBeanFactory支持按类型依赖查找所有bean&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="30" y="490" width="410" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-20" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.526;entryY=1.038;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="xzdQ9acgRFiVdVMhkuag-15" target="xzdQ9acgRFiVdVMhkuag-12">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="440" y="260" as="sourcePoint" />
+            <mxPoint x="600" y="260" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-21" value="HierarchicalBeanFactory" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="520" y="280" width="160" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-23" value="&lt;div style=&quot;text-align: center&quot;&gt;&lt;span&gt;&lt;b&gt;HierarchicalBeanFactory&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;支持层级结构，即父子beanFactory，父beanFactory中的bean对子类可见，反之不可见" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="520" y="360" width="190" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
