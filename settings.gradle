@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         }
     }
 }
-include 'spring-external-config'
-include 'spring-ioc'
+include 'spring-introduction'
+
