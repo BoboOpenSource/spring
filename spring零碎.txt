@@ -1,0 +1,45 @@
+spring将配置文件中的<bean>，@Bean、@Component？@Resource？
+转换为BeanDefinition，并将其注册到BeanDefinitionRegistry中，BeanDefinitionRegistry作为BeanDefinition
+的注册中心，
+
+InstantiationStrategy
+
+不同来源的配置，会被转换为哪种beanDefinition
+
+不同类型的beanDefinition转换为bean时，使用不同的策略，xml中的beanDefinition肯定得用反射
+@Bean是已经创建好的bean？还是beanDefinition？
+@Component对应什么beanDefinition？
+
+实例化、属性填充，分别谁来做
+实例化InstantiationStrategy
+属性填充BeanWrapper。。
+xml中的字符串转换为bean的属性类型：PropertyEditor
+
+xml中的<bean>：
+GenericBeanDefinition
+根据dom(Element)解析固定属性，比如scope、Abstract、lazyInit、DependsOn、InitMethodName、DestroyMethodName、FactoryMethodName、FactoryBeanName
+解析bean自身的属性：
+	构造器参数ConstructorArgumentValues().addIndexedArgumentValue
+	PropertyValues().addPropertyValue
+
+
+@Bean是已经实例化+属性填充过的，但是还得调回调方法
+
+@Bean的处理:
+postProcessor阶段：转换为BeanMethod(MethodMetadata metadata, ConfigurationClass configurationClass)，configClass.addBeanMethod
+
+register进去的class对应AnnotatedGenericBeanDefinition，也会被注册到registry中
+
+BeanFactory级别的 ConfigurationClassPostProcessor
+处理 @Configuration classes
+
+BeanFactory级别的 EventListenerMethodProcessor
+@EventListener方法注解
+
+Bean级别的 AutowiredAnnotationBeanPostProcessor
+@Autowired、@Value、@Inject、
+
+Bean级别的 CommonAnnotationBeanPostProcessor
+@PostConstruct、@PreDestroy、@Resource、
+
+@Autowired、@Value、@Resource、@Inject、@PostConstruct、@PreDestroy、@EventListener
