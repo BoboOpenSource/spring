@@ -26,7 +26,25 @@ GenericBeanDefinition
 @Bean是已经实例化+属性填充过的，但是还得调回调方法
 
 @Bean的处理:
-postProcessor阶段：转换为BeanMethod(MethodMetadata metadata, ConfigurationClass configurationClass)，configClass.addBeanMethod
+转换为BeanMethod(MethodMetadata metadata, ConfigurationClass configurationClass)，configClass.addBeanMethod
+提取为ConfigurationClassBeanDefinition(ConfigurationClass configClass, MethodMetadata beanMethodMetadata, String beanName),beanDef.setFactoryBeanName(configClass.getBeanName())，beanDef.setUniqueFactoryMethodName(methodName);
+
+在get bean时，解析出Method，调用method#invoke获取
+
+
+RootBeanDefinition是运行时的统一BeanDefinition视图，不管创建时是哪种类型的BeanDefinition，refresh阶段都会被转换为RootBeanDefinition(如果没有parent，就是clone一份，如果有，就合并)，
+然后存到AbstractBeanFactory#mergedBeanDefinitions中
+
+
+refresh
+	PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors
+		beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class..)
+			doGetBeanNamesForType
+				getMergedBeanDefinition：将BeanDefinition转换为RootBeanDefinition
+				
+getBean时，也是直接获取RootBeanDefinition
+			
+
 
 register进去的class对应AnnotatedGenericBeanDefinition，也会被注册到registry中
 
