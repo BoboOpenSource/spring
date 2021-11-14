@@ -1,0 +1,157 @@
+<mxfile host="app.diagrams.net" modified="2021-10-10T16:57:02.716Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36" etag="nAXNmRUa4TGhBbs4f4Ne" version="14.8.3" type="github">
+  <diagram id="xym_TpFOBW4FcQDZf0_9" name="Page-1">
+    <mxGraphModel dx="1038" dy="579" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-11" value="BeanFactory" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="230" y="150" width="140" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-12" value="+ field: type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="xzdQ9acgRFiVdVMhkuag-11">
+          <mxGeometry y="26" width="140" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-15" value="ListableBeanFactory" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="140" y="280" width="140" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-17" value="&lt;div style=&quot;text-align: center&quot;&gt;&lt;span&gt;&lt;b&gt;ListableBeanFactory&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;beanFactory只支持单个bean的依赖查找(按beanName或beanType)，按beanName查找单个bean无可厚非，因为在一个beanFactory中，beanName一定是唯一的。但同一个beanType有时会对应多个bean，此时试图使用&lt;br&gt;beanFactory的beanType依赖查找方法，就会报错&lt;br&gt;&lt;br&gt;&lt;span&gt;ListableBeanFactory支持按类型依赖查找所有bean&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="30" y="470" width="410" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-20" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="xzdQ9acgRFiVdVMhkuag-15">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="440" y="260" as="sourcePoint" />
+            <mxPoint x="304" y="203" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-21" value="HierarchicalBeanFactory" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="310" y="280" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-23" value="&lt;div style=&quot;text-align: center&quot;&gt;&lt;span&gt;&lt;b&gt;HierarchicalBeanFactory&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;支持层级结构，即父子beanFactory，父beanFactory中的bean对子类可见，反之不可见" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="30" y="620" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-24" value="ApplicationContext" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="400" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-25" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.503;entryY=1.069;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="390" y="279" as="sourcePoint" />
+            <mxPoint x="300.4200000000001" y="202.79399999999998" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-26" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="xzdQ9acgRFiVdVMhkuag-24" target="xzdQ9acgRFiVdVMhkuag-15">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="480" y="447.01" as="sourcePoint" />
+            <mxPoint x="573.6400000000001" y="369.99800000000005" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-27" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;" edge="1" parent="1">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="310" y="400" as="sourcePoint" />
+            <mxPoint x="400" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-33" value="&lt;div style=&quot;text-align: center&quot;&gt;&lt;span&gt;&lt;b&gt;EnvironmentCapable&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;想让其拥有Environment能力，又不想继承它，那就组合吧&lt;br&gt;&lt;b style=&quot;text-align: center&quot;&gt;Capable，真是个好名字&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="270" y="620" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-39" value="ApplicationContext" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="120" y="950" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-40" value="EnvironmentCapable" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=left;" vertex="1" parent="1">
+          <mxGeometry x="399" y="950" width="190" height="52" as="geometry">
+            <mxRectangle x="500" y="400" width="140" height="26" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-41" value="Environment getEnvironment()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="xzdQ9acgRFiVdVMhkuag-40">
+          <mxGeometry y="26" width="190" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-42" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" target="xzdQ9acgRFiVdVMhkuag-40" source="xzdQ9acgRFiVdVMhkuag-39">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="315" y="976" as="sourcePoint" />
+            <mxPoint x="425" y="980" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-43" value="ApplicationEventPublisher" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=left;" vertex="1" parent="1">
+          <mxGeometry x="115" y="820" width="170" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-44" value="ApplicationEventMulticaster" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=left;" vertex="1" parent="1">
+          <mxGeometry x="310" y="820" width="180" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-45" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="xzdQ9acgRFiVdVMhkuag-39" target="xzdQ9acgRFiVdVMhkuag-43">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="210" y="910" as="sourcePoint" />
+            <mxPoint x="329" y="911" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-46" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="xzdQ9acgRFiVdVMhkuag-39" target="xzdQ9acgRFiVdVMhkuag-44">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="260" y="1080" as="sourcePoint" />
+            <mxPoint x="340" y="1040" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-47" value="&lt;div style=&quot;text-align: center&quot;&gt;&lt;span&gt;&lt;b&gt;Event发布&lt;/b&gt;&lt;/span&gt;&lt;/div&gt;实现了&lt;span&gt;ApplicationEventPublisher，最终委托给&lt;/span&gt;&lt;span&gt;ApplicationEventMulticaster&lt;br&gt;&lt;/span&gt;ApplicationEventPublisher与ApplicationEventMulticaster没有直接的关系&lt;span&gt;&lt;br&gt;&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="50" y="1040" width="250" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-48" value="维护一组ApplicationListener&lt;br&gt;支持增删、并将事件广播给对应的ApplicationListener&lt;br&gt;&lt;span style=&quot;color: rgba(0 , 0 , 0 , 0) ; font-family: monospace ; font-size: 0px&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22Text%22%20style%3D%22text%3Bhtml%3D1%3BstrokeColor%3Dnone%3BfillColor%3Dnone%3Balign%3Dcenter%3BverticalAlign%3Dmiddle%3BwhiteSpace%3Dwrap%3Brounded%3D0%3B%22%20vertex%3D%221%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22530%22%20y%3D%22820%22%20width%3D%22160%22%20height%3D%2220%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="309" y="790" width="210" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-49" value="仅关注事件发布" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="76" y="790" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-52" value="ResourceLoader" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=left;" vertex="1" parent="1">
+          <mxGeometry x="91" y="1200" width="140" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-56" value="ApplicationContext" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="86" y="1440" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-57" value="ResourcePatternResolver" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;align=left;" vertex="1" parent="1">
+          <mxGeometry x="86" y="1320" width="150" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-58" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="xzdQ9acgRFiVdVMhkuag-57" target="xzdQ9acgRFiVdVMhkuag-52">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="-114.5" y="1313.5" as="sourcePoint" />
+            <mxPoint x="4.5" y="1314.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-59" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="xzdQ9acgRFiVdVMhkuag-56" target="xzdQ9acgRFiVdVMhkuag-57">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="171" y="1440" as="sourcePoint" />
+            <mxPoint x="171" y="1372" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-60" value="支持通过正则的方式批量加载resources" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="250" y="1320" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-61" value="ConfigurableBeanFactory" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="519" y="400" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-62" value="使BeanFactory可配置、可扩展&lt;br&gt;比如添加BeanPostProcessor、&lt;br&gt;设置父BeanFactory、注册自定义的Scope、setConversionService、" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="519" y="490" width="201" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-65" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="xzdQ9acgRFiVdVMhkuag-61" target="xzdQ9acgRFiVdVMhkuag-21">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="564" y="380" as="sourcePoint" />
+            <mxPoint x="654" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-66" value="SingletonBeanRegistry" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="630" y="280" width="160" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-70" value="&lt;span&gt;registerSingleton&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="xzdQ9acgRFiVdVMhkuag-66">
+          <mxGeometry y="26" width="160" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-67" value="Extends" style="endArrow=block;endSize=16;endFill=0;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="xzdQ9acgRFiVdVMhkuag-61">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="859" y="435" as="sourcePoint" />
+            <mxPoint x="710" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-68" value="&lt;pre style=&quot;background-color: rgb(255 , 255 , 255) ; font-family: &amp;#34;consolas&amp;#34; , monospace ; font-size: 11.3pt&quot;&gt;&lt;br&gt;&lt;/pre&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="820" y="270" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="xzdQ9acgRFiVdVMhkuag-71" value="registerSingleton，目前主要用于注册Spring中一些希望被公开的单例bean，比如Environment、SystemProperties、SystemEnvironment、ApplicationEventMulticaster" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;rounded=0;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="810" y="296" width="260" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
