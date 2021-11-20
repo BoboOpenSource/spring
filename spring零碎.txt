@@ -1,6 +1,8 @@
 spring将配置文件中的<bean>，@Bean、@Component？@Resource？
 转换为BeanDefinition，并将其注册到BeanDefinitionRegistry中，BeanDefinitionRegistry作为BeanDefinition
 的注册中心，
+当程序依赖查找或者依赖注入bean时，如果bean之前未曾创建，就会从BeanDefinitionRegistry中取出对应的beanDefinition
+然后据此实例化、
 
 InstantiationStrategy
 
@@ -31,6 +33,10 @@ GenericBeanDefinition
 
 在get bean时，解析出Method，调用method#invoke获取
 
+@Component的处理：
+转换为ScannedGenericBeanDefinition
+
+依赖注入时，是按类型查找还是按名称？？
 
 RootBeanDefinition是运行时的统一BeanDefinition视图，不管创建时是哪种类型的BeanDefinition，refresh阶段都会被转换为RootBeanDefinition(如果没有parent，就是clone一份，如果有，就合并)，
 然后存到AbstractBeanFactory#mergedBeanDefinitions中
