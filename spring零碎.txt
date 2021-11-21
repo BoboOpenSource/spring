@@ -40,7 +40,7 @@ GenericBeanDefinition
 
 RootBeanDefinition是运行时的统一BeanDefinition视图，不管创建时是哪种类型的BeanDefinition，refresh阶段都会被转换为RootBeanDefinition(如果没有parent，就是clone一份，如果有，就合并)，
 然后存到AbstractBeanFactory#mergedBeanDefinitions中
-
+为啥要这样搞呢？？
 
 refresh
 	PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors
@@ -67,3 +67,113 @@ Bean级别的 CommonAnnotationBeanPostProcessor
 @PostConstruct、@PreDestroy、@Resource、
 
 @Autowired、@Value、@Resource、@Inject、@PostConstruct、@PreDestroy、@EventListener
+
+public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory
+		implements AutowireCapableBeanFactory {
+
+	//实例化bean的策略
+	private InstantiationStrategy instantiationStrategy;
+
+	public AbstractAutowireCapableBeanFactory() {
+		super();
+		ignoreDependencyInterface(BeanNameAware.class);
+		ignoreDependencyInterface(BeanFactoryAware.class);
+		ignoreDependencyInterface(BeanClassLoaderAware.class);
+		if (NativeDetector.inNativeImage()) {
+			this.instantiationStrategy = new SimpleInstantiationStrategy();
+		}
+		else {
+			//不要被类名误导，只在有必要的时候，才会真正使用cglib技术创建一个子类代理对象，否则还是通过常规的反射方式来实例化
+			//上面的"有必要的时候"指的是beanDefinition添加了MethodOverride时
+			//1.如果是xml方式，<bean>标签中添加了lookup-method或replaced-method属性，加载beanDefinition时，就会为其添加MethodOverride
+			//2.如果是@Component注解(及其派生注解)方式，类中某个方法上添加了@Lookup，加载beanDefinition时，就会为其添加MethodOverride
+			//MethodOverride意味着方法override，有两个实现类，代表两种不同的override方式
+			//a.LookupOverride封装了一个beanName，它override的是原始方法的返回值，其代理逻辑会用该beanName查找IoC容器中的bean，作为方法的真实返回值，所以LookupOverride只能做简单的返回值替换
+			//b.ReplaceOverride也封装了一个beanName，不过这个beanName对应的是我们自定义的MethodReplacer类的beanName，其代理逻辑会用该beanName查找IoC容器中的methodReplacer对象，调用它的
+			Object reimplement(Object obj, Method method, Object[] args)方法，其中obj为原始bean，method为原始method，args为调用参数，
+			所以ReplaceOverride的代理逻辑完全取决于我们自定义的MethodReplacer类
+			this.instantiationStrategy = new CglibSubclassingInstantiationStrategy();
+		}
+	}
+
+	protected Object doCreateBean(String beanName, RootBeanDefinition mbd, @Nullable Object[] args)
+			throws BeanCreationException {
+
+		//实例化bean
+		//最终调用下方的instantiateBean方法返回一个BeanWrapper对象，BeanWrapper相当于一个代理器，它负责完成bean属性的填充工作
+		BeanWrapper instanceWrapper =createBeanInstance(beanName, mbd, args);
+		Object bean = instanceWrapper.getWrappedInstance();
+		Class<?> beanType = instanceWrapper.getWrappedClass();
+		if (beanType != NullBean.class) {
+			mbd.resolvedTargetType = beanType;
+		}
+
+		// 初始化bean实例
+		Object exposedObject = bean;
+		try {
+			//根据beanDefinition中定义的propertyValues，来填充bean属性
+			populateBean(beanName, mbd, instanceWrapper);
+			//
+			exposedObject = initializeBean(beanName, exposedObject, mbd);
+		}
+
+		。。。
+	}
+
+
+	protected BeanWrapper instantiateBean(String beanName, RootBeanDefinition mbd) {
+		try {
+			//委托上述instantiationStrategy实例化bean
+			Object beanInstance = getInstantiationStrategy().instantiate(mbd, beanName, this);
+
+			//将bean实例封装为BeanWrapper，通过InstantiationStrategy实例化出来的对象只是一个半成品，还需要经过属性填充、初始化方法？？等工作才能被正常使用
+			BeanWrapper bw = new BeanWrapperImpl(beanInstance);
+			initBeanWrapper(bw);
+			return bw;
+		}
+		catch (Throwable ex) {
+			throw new BeanCreationException(
+					mbd.getResourceDescription(), beanName, "Instantiation of bean failed", ex);
+		}
+	}
+}
+//上述的getInstantiationStrategy().instantiate实际调用的是CglibSubclassingInstantiationStrategy的父类SimpleInstantiationStrategy的instantiate方法
+public class SimpleInstantiationStrategy implements InstantiationStrategy {
+
+	//根据beanDefinition实例化bean
+	public Object instantiate(RootBeanDefinition bd, @Nullable String beanName, BeanFactory owner) {
+		if (!bd.hasMethodOverrides()) {
+		// 若beanDefinition中不含methodOverrides，通过反射的方式执行实例化
+			Constructor<?> constructorToUse;
+			synchronized (bd.constructorArgumentLock) {
+				constructorToUse = (Constructor<?>) bd.resolvedConstructorOrFactoryMethod;
+				if (constructorToUse == null) {
+					final Class<?> clazz = bd.getBeanClass();
+					if (clazz.isInterface()) {
+						throw new BeanInstantiationException(clazz, "Specified class is an interface");
+					}
+					try {
+						if (System.getSecurityManager() != null) {
+							constructorToUse = AccessController.doPrivileged(
+									(PrivilegedExceptionAction<Constructor<?>>) clazz::getDeclaredConstructor);
+						}
+						else {
+							//通过beanDefinition中的beanClass属性找到对应的构造器
+							constructorToUse = clazz.getDeclaredConstructor();
+						}
+						bd.resolvedConstructorOrFactoryMethod = constructorToUse;
+					}
+					catch (Throwable ex) {
+						throw new BeanInstantiationException(clazz, "No default constructor found", ex);
+					}
+				}
+			}
+			//通过构造器创建bean对象
+			return BeanUtils.instantiateClass(constructorToUse);
+		}
+		else {
+			// 若beanDefinition中包含methodOverrides，使用cglib创建子类代理对象
+			return instantiateWithMethodInjection(bd, beanName, owner);
+		}
+	}
+}
